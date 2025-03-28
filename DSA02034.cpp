@@ -1,35 +1,23 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define MOD 1000000007
-
 using namespace std;
 
 int t, n, a[20], used[20];
 
-void in(){
-    for (int i = 1; i <= n; i++) cout << a[i];
-    cout << "\n";
-}
-
-bool check(){
-    for (int i = 2; i <= n; i++){
-        if (abs(a[i] - a[i - 1]) == 1) return false;
-    }
-    return true;
-}
-
 void Try(int i){
+    if (i == n){
+        for (int k = 0; k < n; k++) cout << a[k];
+        cout << "\n";
+        return;
+    }
     for (int j = 1; j <= n; j++){
         if (used[j] == 0){
-            a[i] = j;
-            used[j] = 1;
+            if (i == 0 || abs(j - a[i - 1]) != 1){
+                a[i] = j;
+                used[j] = 1;
 
-            if (i == n){
-                if (check()) in();
+                Try(i + 1);
+                used[j] = 0;
             }
-            else Try(i + 1);
-
-            used[j] = 0;
         }
     }
 }
@@ -40,7 +28,7 @@ int main(){
     cin >> t;
     while (t--){
         cin >> n;
-        Try(1);
+        Try(0);
     }
     return 0;
 }
