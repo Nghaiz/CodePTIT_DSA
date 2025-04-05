@@ -1,7 +1,4 @@
 #include <bits/stdc++.h>
-#define ll long long
-#define MOD 1000000007
-
 using namespace std;
 
 int main(){
@@ -10,25 +7,17 @@ int main(){
     int t;
     cin >> t;
     while (t--){
-        int n, m, x;
+        int n, m, x, min_val = INT_MAX, max_val = INT_MIN;
         cin >> n >> m;
-        set<int> hop, giao;
-
         for (int i = 0; i < n; i++){
             cin >> x;
-            hop.insert(x);
+            max_val = max(max_val, x);
         }
         for (int i = 0; i < m; i++){
             cin >> x;
-            if (hop.count(x)) giao.insert(x);
-
-            hop.insert(x);
+            min_val = min(min_val, x);
         }
-
-        for (int x : hop) cout << x << " ";
-        cout << "\n";
-        for (int x : giao) cout << x << " ";
-        cout << "\n";
+        cout << 1ll * min_val * max_val << "\n";
     }
     return 0;
 }
